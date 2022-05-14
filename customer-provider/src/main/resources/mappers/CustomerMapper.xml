@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.customerprovider.dao.CustomerDao">
+    
+    <resultMap id="customerMap" type="customer">
+        <id column="id" property="customerId"/>
+        <result column="customer_address" property="customerAddress"/>
+        <result column="customer_name" property="customerName"/>
+        <result column="customer_ticket" property="customerTicket"/>
+    </resultMap>
+    <insert id="addCustomer">
+        insert into tb_customer(customer_name, customer_address, customer_ticket)
+        values (#{customerName},#{customerAddress},#{customerTicket})
+    </insert>
+
+    <update id="update">
+        update tb_customer
+        set customer_name = #{customerName},customer_address = #{customerAddress},customer_ticket = #{customerTicket}
+        where id = #{customerId}
+    </update>
+
+    <delete id="deleteById">
+        delete from tb_customer where id = #{id}
+    </delete>
+
+    <select id="list" resultMap="customerMap">
+        select * from tb_customer
+    </select>
+
+    <select id="getById" resultMap="customerMap">
+        select * from tb_customer where id = #{id}
+    </select>
+
+
+</mapper>
